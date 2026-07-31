@@ -47,6 +47,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -161,7 +162,14 @@ def collect_minutes(
     month_start: dt.date,
     today: dt.date,
 ) -> dict[str, dict[str, int]]:
-    """Zwraca {gid: {"week": min, "month": min}} na podstawie wpisów czasu."""
+    """Zwraca {gid: {"week": min, "month": min}} na podstawie wpisów czasu.
+
+    Wpisy czasu pobieramy jednym zapytaniem na zadanie, ale RÓWNOLEGLE
+    (pula wątków), bo o łącznym czasie decyduje opóźnienie sieci, a nie CPU.
+    Liczba wątków sterowana zmienną ASANA_MAX_WORKERS (domyślnie 8). Klient
+    i tak respektuje limit 429 (Retry-After / backoff), więc przy dużej
+    liczbie zadań przebieg skraca się z kilkunastu minut do 1–2.
+    """
     modified_since_iso = (
         dt.datetime.combine(month_start, dt.time.min)
         .replace(tzinfo=dt.timezone.utc)
@@ -169,10 +177,22 @@ def collect_minutes(
     )
     result: dict[str, dict[str, int]] = {gid: {"week": 0, "month": 0} for gid, _ in team}
 
+    # 1) Zbierz listę zadań każdej osoby (kilka stron – szybkie, sekwencyjnie).
+    jobs: list[tuple[str, str]] = []  # (gid_osoby, gid_zadania)
     for gid, name in team:
         tasks = asana.tasks_for_assignee(workspace, gid, modified_since_iso)
-        for task in tasks:
-            for entry in asana.time_entries(task["gid"]):
+        jobs.extend((gid, task["gid"]) for task in tasks)
+        print(f"  * {name}: {len(tasks)} zadań do sprawdzenia", file=sys.stderr)
+
+    # 2) Pobierz wpisy czasu równolegle i zsumuj (kolejność bez znaczenia).
+    def fetch(job: tuple[str, str]) -> tuple[str, list[dict]]:
+        gid, task_gid = job
+        return gid, asana.time_entries(task_gid)
+
+    max_workers = max(1, int(os.environ.get("ASANA_MAX_WORKERS", "8")))
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        for gid, entries in executor.map(fetch, jobs):
+            for entry in entries:
                 created_by = entry.get("created_by") or {}
                 if created_by.get("gid") != gid:
                     continue  # licz tylko czas zalogowany przez tę osobę
@@ -188,6 +208,8 @@ def collect_minutes(
                     result[gid]["month"] += minutes
                     if week_start <= day <= today:
                         result[gid]["week"] += minutes
+
+    for gid, name in team:
         print(f"  * {name}: {result[gid]['week']} min (tydzień) / "
               f"{result[gid]['month']} min (miesiąc)", file=sys.stderr)
     return result

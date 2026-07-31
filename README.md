@@ -90,6 +90,10 @@ sposób obsłużone automatycznie). Pozostałe przebiegi kończą się bez wysy�
 - **Inny workspace** – `ASANA_WORKSPACE_GID`.
 - **Inna strefa/godzina** – `REPORT_TZ` oraz godziny w cronie i warunek
   `now_local.hour != 10` w skrypcie.
+- **Szybkość** – wpisy czasu pobierane są równolegle. Liczbę wątków ustawia
+  `ASANA_MAX_WORKERS` (domyślnie `8`). Więcej wątków = szybciej, ale przy zbyt
+  agresywnym ustawieniu Asana częściej odpowiada limitem `429` (skrypt sam go
+  respektuje i odczekuje). Wartość domyślna jest bezpiecznym kompromisem.
 
 ## Uruchomienie lokalne (opcjonalnie)
 
