@@ -1,0 +1,46 @@
+name: Cotygodniowy raport czasu z Asany
+
+on:
+  schedule:
+    # Cron w GitHub Actions jest w UTC i NIE zna zmiany czasu (DST).
+    # 10:00 w Polsce = 08:00 UTC (czas letni) lub 09:00 UTC (czas zimowy),
+    # dlatego odpalamy o obu godzinach w piątek, a sam skrypt wysyła raport
+    # tylko wtedy, gdy lokalnie jest naprawdę 10:00 (reszta przebiegów kończy
+    # się bez wysyłki). Minuta 8 zamiast 0, żeby nie celować w szczyt obciążenia.
+    - cron: "8 8 * * 5"   # piątek 08:00 UTC  -> 10:00 czasu letniego (CEST)
+    - cron: "8 9 * * 5"   # piątek 09:00 UTC  -> 10:00 czasu zimowego (CET)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Tryb testowy: policz i wypisz raport, ale NIE wysyłaj maila"
+        type: boolean
+        default: true
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Wygeneruj i wyślij raport
+        env:
+          ASANA_TOKEN: ${{ secrets.ASANA_TOKEN }}
+          # Wysyłka e-mail (SMTP):
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          # Ręczne uruchomienie z checkboxem "dry_run" pomija wysyłkę
+          # i pomija kontrolę godziny (FORCE_SEND), żeby dało się testować
+          # o dowolnej porze.
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+          FORCE_SEND: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+        run: python scripts/asana_weekly_report.py
