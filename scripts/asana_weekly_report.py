@@ -33,7 +33,7 @@ Wysyłka e-mail (jeśli chcesz realnie wysłać):
 
 Sterowanie:
   DRY_RUN=1          - nie wysyłaj maila, wypisz raport na stdout.
-  FORCE_SEND=1       - pomiń kontrolę godziny (wyślij niezależnie od pory).
+  FORCE_SEND=1       - wyślij niezależnie od dnia tygodnia (ręczne uruchomienie).
 """
 
 from __future__ import annotations
@@ -354,11 +354,14 @@ def main() -> int:
     dry_run = os.environ.get("DRY_RUN", "0") == "1"
     force_send = os.environ.get("FORCE_SEND", "0") == "1"
 
-    # Zabezpieczenie godziny: cron w GitHub Actions jest w UTC i nie zna DST,
-    # więc uruchamiamy o 08:00 i 09:00 UTC, a realnie działamy tylko o 10:00
-    # czasu lokalnego (chyba że DRY_RUN/FORCE_SEND).
-    if not dry_run and not force_send and now_local.hour != 10:
-        print(f"Pora lokalna {now_local:%H:%M} != 10:00 – pomijam ten przebieg.", file=sys.stderr)
+    # Wysyłamy w każdym zaplanowanym piątkowym przebiegu. NIE sprawdzamy
+    # dokładnej godziny: harmonogramy GitHub Actions bywają uruchamiane z
+    # dużym opóźnieniem (nawet ~1 h), a wcześniejsza wersja przez sztywny
+    # warunek "godzina == 10" przez to pomijała wysyłkę. Cron jest ustawiony
+    # na jeden przebieg w piątek, więc raport idzie dokładnie raz.
+    if not dry_run and not force_send and now_local.weekday() != 4:  # 4 = piątek
+        print(f"Lokalnie nie jest piątek ({now_local:%Y-%m-%d %H:%M}) – pomijam.",
+              file=sys.stderr)
         return 0
 
     workspace = os.environ.get("ASANA_WORKSPACE_GID", DEFAULT_WORKSPACE_GID)

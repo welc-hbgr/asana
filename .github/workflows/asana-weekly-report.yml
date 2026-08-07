@@ -2,13 +2,13 @@ name: Cotygodniowy raport czasu z Asany
 
 on:
   schedule:
-    # Cron w GitHub Actions jest w UTC i NIE zna zmiany czasu (DST).
-    # 10:00 w Polsce = 08:00 UTC (czas letni) lub 09:00 UTC (czas zimowy),
-    # dlatego odpalamy o obu godzinach w piątek, a sam skrypt wysyła raport
-    # tylko wtedy, gdy lokalnie jest naprawdę 10:00 (reszta przebiegów kończy
-    # się bez wysyłki). Minuta 8 zamiast 0, żeby nie celować w szczyt obciążenia.
-    - cron: "8 8 * * 5"   # piątek 08:00 UTC  -> 10:00 czasu letniego (CEST)
-    - cron: "8 9 * * 5"   # piątek 09:00 UTC  -> 10:00 czasu zimowego (CET)
+    # Jeden przebieg w piątek. Cron GitHub Actions działa w UTC, a same
+    # harmonogramy bywają uruchamiane z DUŻYM opóźnieniem (nierzadko ~1 h),
+    # dlatego NIE opieramy się na dokładnej godzinie – skrypt wysyła raport
+    # w każdym zaplanowanym piątkowym przebiegu. 08:00 UTC = 10:00 (czas
+    # letni) / 09:00 (czas zimowy) w Polsce; ewentualne opóźnienie GitHuba
+    # przesuwa wysyłkę tylko o kilkadziesiąt minut później tego samego ranka.
+    - cron: "0 8 * * 5"   # piątek 08:00 UTC
   workflow_dispatch:
     inputs:
       dry_run:

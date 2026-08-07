@@ -75,21 +75,28 @@ Ręczne uruchomienie pomija kontrolę godziny, więc przetestujesz o dowolnej po
 
 ## Harmonogram
 
-Cron w GitHub Actions działa w UTC i nie zna zmiany czasu, dlatego workflow
-odpala się o `08:00` i `09:00 UTC` w piątek, a skrypt wysyła raport tylko
-wtedy, gdy w Polsce jest naprawdę `10:00` (czas letni i zimowy są w ten
-sposób obsłużone automatycznie). Pozostałe przebiegi kończą się bez wysyłki.
+Workflow ma **jeden** cron: `0 8 * * 5` (piątek `08:00 UTC`, czyli `10:00`
+czasu letniego / `09:00` czasu zimowego w Polsce). Raport jest wysyłany w
+**każdym** zaplanowanym piątkowym przebiegu – skrypt **nie** sprawdza już
+dokładnej godziny.
 
-> Uwaga: harmonogramy GitHub Actions bywają uruchamiane z kilkuminutowym
-> opóźnieniem przy dużym obciążeniu – to normalne dla cronów GitHuba.
+> **Dlaczego nie ma kontroli godziny?** Harmonogramy GitHub Actions bywają
+> uruchamiane z **dużym** opóźnieniem (nierzadko ~1 h). Wcześniejsza wersja
+> wysyłała tylko o równej `10:00` i przez takie opóźnienie potrafiła pominąć
+> piątek. Teraz opóźnienie GitHuba jedynie przesuwa wysyłkę o kilkadziesiąt
+> minut później tego samego ranka – raport i tak dojdzie.
+
+> Uwaga: w rzadkich przypadkach GitHub potrafi **całkiem pominąć** zaplanowany
+> przebieg (przy bardzo dużym obciążeniu). Gdyby raport kiedyś nie przyszedł,
+> zawsze można go dosłać ręcznie: *Actions → Run workflow → `dry_run=false`*.
 
 ## Dostosowanie
 
 - **Inny zespół / inne osoby** – zmienne `ASANA_USER_GIDS` i `ASANA_USER_NAMES`
   (listy po przecinku, równoległe), lub edycja `DEFAULT_TEAM` w skrypcie.
 - **Inny workspace** – `ASANA_WORKSPACE_GID`.
-- **Inna strefa/godzina** – `REPORT_TZ` oraz godziny w cronie i warunek
-  `now_local.hour != 10` w skrypcie.
+- **Inna strefa/dzień/godzina** – `REPORT_TZ` oraz wyrażenie `cron` w
+  workflow (i ewentualnie warunek dnia `now_local.weekday() != 4` w skrypcie).
 - **Szybkość** – wpisy czasu pobierane są równolegle. Liczbę wątków ustawia
   `ASANA_MAX_WORKERS` (domyślnie `8`). Więcej wątków = szybciej, ale przy zbyt
   agresywnym ustawieniu Asana częściej odpowiada limitem `429` (skrypt sam go
