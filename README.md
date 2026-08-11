@@ -110,3 +110,51 @@ DRY_RUN=1 python3 scripts/asana_weekly_report.py
 ```
 
 Wymaga Pythona 3.9+ (skrypt korzysta tylko z biblioteki standardowej).
+
+---
+
+# Codzienny raport opóźnionych tasków (Slack)
+
+Druga automatyzacja: **codziennie rano (~09:00 czasu polskiego)** wysyła na
+**Slacka** listę **opóźnionych** zadań (niezakończonych, z terminem, który
+już minął) dla zespołu, pogrupowaną po osobach.
+
+Domyślny zespół: Aleksandra Ster, Marcel Szydło, Adrian Horowski,
+Przemysław Żywicki.
+
+- `scripts/asana_overdue_tasks.py` – jednym zapytaniem do wyszukiwarki Asany
+  pobiera niezakończone zadania z terminem przed dzisiaj i wysyła je na Slacka.
+- `.github/workflows/asana-overdue-daily.yml` – cron codziennie o `07:00 UTC`
+  (= 09:00 latem / 08:00 zimą) oraz uruchomienie na żądanie.
+
+## Konfiguracja Slacka (jednorazowo)
+
+Potrzebny jest **Incoming Webhook** Slacka:
+
+1. Wejdź na <https://api.slack.com/apps> → **Create New App** → *From scratch*.
+2. Nadaj nazwę (np. „Asana Opóźnienia"), wybierz swój workspace Slacka.
+3. W menu **Incoming Webhooks** → przełącz **Activate Incoming Webhooks** na *On*.
+4. **Add New Webhook to Workspace** → wybierz kanał (lub swoje DM) → **Allow**.
+5. Skopiuj wygenerowany **Webhook URL** (postać `https://hooks.slack.com/services/…`).
+6. Dodaj go w repo jako sekret (*Settings → Secrets and variables → Actions*):
+
+| Sekret | Wartość |
+|---|---|
+| `SLACK_WEBHOOK_URL` | skopiowany Webhook URL |
+
+`ASANA_TOKEN` jest współdzielony z raportem czasu – nie trzeba go dodawać ponownie.
+
+## Test
+
+*Actions → „Codzienny raport opóźnionych tasków (Slack)" → Run workflow*:
+- `dry_run = true` → wiadomość tylko wypisze się w logach (bez Slacka),
+- `dry_run = false` → wyśle prawdziwą wiadomość na skonfigurowany kanał.
+
+## Dostosowanie
+
+- **Inny zespół** – `ASANA_USER_GIDS` / `ASANA_USER_NAMES` lub `DEFAULT_TEAM`
+  w skrypcie.
+- **Inna godzina / częstotliwość** – wyrażenie `cron` w workflow (obecnie
+  codziennie; np. tylko dni robocze: `0 7 * * 1-5`).
+- **Definicja „opóźnienia"** – skrypt liczy zadania z terminem **przed** dziś
+  (zadania z terminem na dziś nie są jeszcze traktowane jako opóźnione).
