@@ -97,10 +97,13 @@ class Asana:
         raise AsanaError(f"Nie udało się pobrać {url} po kilku próbach: {last}")
 
     def overdue_tasks(self, workspace: str, gids: list[str], today: dt.date) -> list[dict]:
-        """Niezakończone zadania z terminem przed `today`, dla podanych osób.
+        """Niezakończone zadania PO TERMINIE (due < today), dla podanych osób.
 
         Używa wyszukiwarki Asany (wymaga planu z zaawansowanym wyszukiwaniem).
-        Zwraca listę zadań z polami: name, due_on, assignee.gid/name, permalink_url.
+        Filtr `due_on.before` w API bywa inkluzywny (zwraca też zadania z
+        terminem na dziś), dlatego dokładne odcięcie robimy po stronie skryptu:
+        zostawiamy tylko zadania, których termin minął (co najmniej 1 dzień).
+        Zwraca zadania z polami: name, due_on, assignee.gid/name, permalink_url.
         """
         payload = self._request(
             f"/workspaces/{workspace}/tasks/search",
@@ -114,7 +117,18 @@ class Asana:
                 "limit": 100,
             },
         )
-        return payload.get("data", [])
+        overdue: list[dict] = []
+        for task in payload.get("data", []):
+            due_on = task.get("due_on")
+            if not due_on:
+                continue  # bez terminu nie liczymy jako "po terminie"
+            try:
+                due = dt.date.fromisoformat(due_on)
+            except ValueError:
+                continue
+            if (today - due).days >= 1:  # ściśle przed dzisiaj = po terminie
+                overdue.append(task)
+        return overdue
 
 
 # --- Formatowanie ----------------------------------------------------------
@@ -128,6 +142,18 @@ PL_MONTHS = [
 def pl_days(n: int) -> str:
     """Poprawna polska odmiana: 1 dzień / 2 dni / 5 dni po terminie."""
     return "1 dzień po terminie" if n == 1 else f"{n} dni po terminie"
+
+
+def slack_text(s: str) -> str:
+    """Przygotowuje tekst do wstawienia w wiadomość/link Slacka.
+
+    Escape'uje znaki specjalne mrkdwn (`&`, `<`, `>`), zamienia `|` (które jest
+    separatorem w linkach `<url|tekst>`) oraz zbija znaki nowej linii i nadmiar
+    spacji, żeby nazwa zadania nie rozwaliła formatowania.
+    """
+    s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    s = s.replace("|", "/")
+    return " ".join(s.split())
 
 
 def build_message(
@@ -159,7 +185,7 @@ def build_message(
             continue
         lines.append(f"*{name}* ({len(items)}):")
         for task in items:
-            title = task.get("name") or "(bez nazwy)"
+            title = slack_text(task.get("name") or "(bez nazwy)")
             url = task.get("permalink_url")
             due_on = task.get("due_on")
             label = f"<{url}|{title}>" if url else title
