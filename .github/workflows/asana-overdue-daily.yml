@@ -1,0 +1,34 @@
+name: Codzienny raport opóźnionych tasków (Slack)
+
+on:
+  schedule:
+    # Codziennie 07:00 UTC. Latem (CEST) = 09:00, zimą (CET) = 08:00 czasu
+    # polskiego. Harmonogramy GitHub Actions bywają uruchamiane z opóźnieniem,
+    # więc realnie wiadomość może pojawić się nieco później tego samego ranka.
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Tryb testowy: wypisz wiadomość, ale NIE wysyłaj na Slacka"
+        type: boolean
+        default: true
+
+jobs:
+  overdue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Wyślij raport opóźnionych tasków
+        env:
+          ASANA_TOKEN: ${{ secrets.ASANA_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # Ręczne uruchomienie z checkboxem "dry_run" pomija wysyłkę na Slacka.
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+        run: python scripts/asana_overdue_tasks.py
