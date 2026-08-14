@@ -29,7 +29,15 @@ jobs:
       - name: Wyślij raport opóźnionych tasków
         env:
           ASANA_TOKEN: ${{ secrets.ASANA_TOKEN }}
+          # Wysyłka na Slacka (opcjonalna – gdy ustawiony webhook):
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          # Ręczne uruchomienie z checkboxem "dry_run" pomija wysyłkę na Slacka.
+          # Wysyłka e-mail (te same sekrety co raport RBH):
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          # Ręczne uruchomienie z checkboxem "dry_run" pomija wysyłkę.
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
         run: python scripts/asana_overdue_tasks.py

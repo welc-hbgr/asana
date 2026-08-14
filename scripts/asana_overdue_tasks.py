@@ -6,16 +6,21 @@ Dla zdefiniowanego zespołu znajduje w Asanie zadania, które:
   * są NIEUKOŃCZONE (`completed = false`),
   * mają termin (`due date`) PRZED dzisiejszym dniem (czyli po terminie).
 
-Wynik grupowany jest po osobach i wysyłany jako wiadomość na Slacka przez
-Incoming Webhook. Zadania pobierane są jednym zapytaniem do wyszukiwarki
-Asany (`/workspaces/{gid}/tasks/search`), więc raport jest szybki.
+Wynik grupowany jest po osobach i wysyłany na Slacka (Incoming Webhook)
+i/lub e-mailem (SMTP) — w zależności od tego, co jest skonfigurowane.
+Zadania pobierane są jednym zapytaniem do wyszukiwarki Asany
+(`/workspaces/{gid}/tasks/search`), więc raport jest szybki.
 
 Skrypt korzysta wyłącznie z biblioteki standardowej Pythona (>=3.9),
 więc nie wymaga instalacji zależności.
 
 Wymagane zmienne środowiskowe:
   ASANA_TOKEN        - Personal Access Token do Asany (sekret).
-  SLACK_WEBHOOK_URL  - URL Incoming Webhooka Slacka (sekret) - do realnej wysyłki.
+
+Kanały wysyłki (wystarczy jeden; można oba naraz):
+  SLACK_WEBHOOK_URL  - URL Incoming Webhooka Slacka (sekret).
+  SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, MAIL_FROM, MAIL_TO
+                     - wysyłka e-mail (SMTP_STARTTLS "1"/"0", domyślnie 1).
 
 Opcjonalne (mają sensowne wartości domyślne dla tego workspace):
   ASANA_WORKSPACE_GID  - GID workspace (domyślnie Harbingers).
@@ -30,13 +35,17 @@ Sterowanie:
 from __future__ import annotations
 
 import datetime as dt
+import html
 import json
 import os
+import smtplib
 import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 try:
     from zoneinfo import ZoneInfo
@@ -156,19 +165,37 @@ def slack_text(s: str) -> str:
     return " ".join(s.split())
 
 
-def build_message(
-    team: list[tuple[str, str]],
-    tasks: list[dict],
-    today: dt.date,
-) -> str:
-    """Składa treść wiadomości Slacka (mrkdwn)."""
-    # Pogrupuj zadania po osobie (gid).
+def group_by_person(
+    team: list[tuple[str, str]], tasks: list[dict]
+) -> dict[str, list[dict]]:
+    """Grupuje zadania po osobie (gid), zachowując kolejność zespołu."""
     by_person: dict[str, list[dict]] = {gid: [] for gid, _ in team}
     for task in tasks:
         assignee = task.get("assignee") or {}
         gid = assignee.get("gid")
         if gid in by_person:
             by_person[gid].append(task)
+    return by_person
+
+
+def days_overdue(task: dict, today: dt.date) -> int | None:
+    """Ile dni po terminie (None, jeśli brak/niepoprawny termin)."""
+    due_on = task.get("due_on")
+    if not due_on:
+        return None
+    try:
+        return (today - dt.date.fromisoformat(due_on)).days
+    except ValueError:
+        return None
+
+
+def build_message(
+    team: list[tuple[str, str]],
+    tasks: list[dict],
+    today: dt.date,
+) -> str:
+    """Składa treść wiadomości Slacka (mrkdwn)."""
+    by_person = group_by_person(team, tasks)
 
     date_h = f"{today.day} {PL_MONTHS[today.month]} {today.year}"
     total = sum(len(v) for v in by_person.values())
@@ -200,6 +227,118 @@ def build_message(
                 lines.append(f"   • {label}")
         lines.append("")
     return "\n".join(lines).rstrip()
+
+
+# --- Formatka e-mail (HTML + tekst) ----------------------------------------
+
+
+def build_email(
+    team: list[tuple[str, str]],
+    tasks: list[dict],
+    today: dt.date,
+) -> tuple[str, str, str]:
+    """Zwraca (temat, treść_tekstowa, treść_html) dla wysyłki e-mail."""
+    by_person = group_by_person(team, tasks)
+    date_h = f"{today.day} {PL_MONTHS[today.month]} {today.year}"
+    total = sum(len(v) for v in by_person.values())
+    subject = f"🕐 Opóźnione taski w Asanie – {date_h}"
+
+    # --- wersja tekstowa ---
+    lines = [subject, ""]
+    if total == 0:
+        lines.append("Brak zaległości — cały zespół ma zadania w terminie. 🎉")
+    else:
+        lines.append(f"Łącznie po terminie: {total}")
+        lines.append("")
+        for gid, name in team:
+            items = by_person[gid]
+            if not items:
+                lines.append(f"{name}: brak")
+                continue
+            lines.append(f"{name} ({len(items)}):")
+            for task in items:
+                title = task.get("name") or "(bez nazwy)"
+                due_on = task.get("due_on")
+                days = days_overdue(task, today)
+                suffix = f" – termin {due_on} ({pl_days(days)})" if days is not None else ""
+                lines.append(f"  - {title}{suffix}")
+            lines.append("")
+    text = "\n".join(lines).rstrip()
+
+    # --- wersja HTML ---
+    def esc(s: str) -> str:
+        return html.escape(" ".join((s or "").split()))
+
+    if total == 0:
+        body = ('<p style="margin:0;color:#1a1a1a">Brak zaległości — '
+                'cały zespół ma zadania w terminie. 🎉</p>')
+    else:
+        sections = ""
+        for gid, name in team:
+            items = by_person[gid]
+            if not items:
+                sections += (f'<h2 style="font-size:15px;margin:18px 0 6px">{esc(name)} '
+                             '<span style="color:#3a9a4c;font-weight:400">— brak ✅</span></h2>')
+                continue
+            rows = ""
+            for task in items:
+                title = esc(task.get("name") or "(bez nazwy)")
+                url = task.get("permalink_url")
+                link = f'<a href="{html.escape(url)}" style="color:#1a56db;text-decoration:none">{title}</a>' if url else title
+                due_on = task.get("due_on")
+                days = days_overdue(task, today)
+                meta = (f'<span style="color:#888"> — termin {due_on} '
+                        f'({pl_days(days)})</span>') if days is not None else ""
+                rows += (f'<li style="margin:4px 0;line-height:1.4">{link}{meta}</li>')
+            sections += (
+                f'<h2 style="font-size:15px;margin:18px 0 6px">{esc(name)} '
+                f'<span style="color:#c23b3b;font-weight:400">({len(items)})</span></h2>'
+                f'<ul style="margin:0 0 4px 0;padding-left:20px">{rows}</ul>'
+            )
+        body = sections
+
+    html_doc = f"""\
+<!doctype html><html lang="pl"><body style="margin:0;background:#f6f7f9;
+font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1a1a1a">
+<div style="max-width:600px;margin:0 auto;padding:24px">
+  <h1 style="font-size:20px;margin:0 0 4px">🕐 Opóźnione taski w Asanie</h1>
+  <p style="margin:0 0 16px;color:#666">{date_h} · łącznie po terminie: {total}</p>
+  {body}
+  <p style="margin:22px 0 0;color:#999;font-size:12px">
+    Zadania niezakończone, których termin (due date) już minął. Źródło: Asana.
+  </p>
+</div></body></html>"""
+    return subject, text, html_doc
+
+
+# --- Wysyłka e-mail (SMTP) -------------------------------------------------
+
+
+def send_email(subject: str, text: str, html_body: str) -> None:
+    host = os.environ["SMTP_HOST"]
+    port = int(os.environ.get("SMTP_PORT", "587"))
+    user = os.environ.get("SMTP_USER")
+    password = os.environ.get("SMTP_PASS")
+    mail_from = os.environ.get("MAIL_FROM", user or "")
+    mail_to = os.environ.get("MAIL_TO", "welc@harbingers.io")
+    use_starttls = os.environ.get("SMTP_STARTTLS", "1") != "0"
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = mail_from
+    msg["To"] = mail_to
+    msg.attach(MIMEText(text, "plain", "utf-8"))
+    msg.attach(MIMEText(html_body, "html", "utf-8"))
+
+    with smtplib.SMTP(host, port, timeout=60) as server:
+        server.ehlo()
+        if use_starttls:
+            server.starttls()
+            server.ehlo()
+        if user and password:
+            server.login(user, password)
+        server.sendmail(mail_from, [a.strip() for a in mail_to.split(",")], msg.as_string())
+    print(f"E-mail wysłany do: {mail_to}", file=sys.stderr)
 
 
 # --- Wysyłka na Slacka -----------------------------------------------------
@@ -262,16 +401,27 @@ def main() -> int:
     print(f"Znaleziono opóźnionych zadań: {len(tasks)}", file=sys.stderr)
 
     message = build_message(team, tasks, today)
+    subject, text, html_body = build_email(team, tasks, today)
 
     if dry_run:
-        print("\n===== DRY RUN – wiadomość (bez wysyłki na Slacka) =====\n")
+        print("\n===== DRY RUN – E-MAIL (tekst) =====\n")
+        print(text)
+        print("\n===== DRY RUN – SLACK (mrkdwn) =====\n")
         print(message)
         return 0
 
     webhook = os.environ.get("SLACK_WEBHOOK_URL")
-    if not webhook:
-        raise SystemExit("Brak SLACK_WEBHOOK_URL w środowisku.")
-    send_slack(webhook, message)
+    has_smtp = bool(os.environ.get("SMTP_HOST"))
+    if not webhook and not has_smtp:
+        raise SystemExit(
+            "Nie skonfigurowano żadnego kanału wysyłki "
+            "(ustaw SLACK_WEBHOOK_URL i/lub SMTP_HOST)."
+        )
+
+    if webhook:
+        send_slack(webhook, message)
+    if has_smtp:
+        send_email(subject, text, html_body)
     return 0
 
 
