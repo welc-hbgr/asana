@@ -115,7 +115,7 @@ Wymaga Pythona 3.9+ (skrypt korzysta tylko z biblioteki standardowej).
 
 # Codzienny raport opóźnionych tasków (Slack)
 
-Druga automatyzacja: **w dni robocze (pon–pt) rano (~09:00 czasu polskiego)**
+Druga automatyzacja: **w dni robocze (pon–pt) rano (~08:00 czasu polskiego)**
 wysyła listę **opóźnionych** zadań (niezakończonych, z terminem, który już
 minął) dla zespołu, pogrupowaną po osobach. Wysyłka idzie **e-mailem i/lub na
 Slacka** — na te kanały, które są skonfigurowane.
@@ -127,7 +127,7 @@ Przemysław Żywicki.
   pobiera niezakończone zadania z terminem przed dzisiaj i wysyła je mailem
   (SMTP) oraz/lub na Slacka (Incoming Webhook).
 - `.github/workflows/asana-overdue-daily.yml` – cron w dni robocze (pon–pt)
-  o `07:00 UTC` (= 09:00 latem / 08:00 zimą) oraz uruchomienie na żądanie.
+  o `06:00 UTC` (= 08:00 latem / 07:00 zimą) oraz uruchomienie na żądanie.
 
 ## Kanały wysyłki
 
@@ -170,6 +170,6 @@ Potrzebny jest **Incoming Webhook** Slacka:
 - **Inny zespół** – `ASANA_USER_GIDS` / `ASANA_USER_NAMES` lub `DEFAULT_TEAM`
   w skrypcie.
 - **Inna godzina / częstotliwość** – wyrażenie `cron` w workflow (obecnie
-  dni robocze `0 7 * * 1-5`; np. codziennie z weekendami: `0 7 * * *`).
+  dni robocze `0 6 * * 1-5`; np. codziennie z weekendami: `0 6 * * *`).
 - **Definicja „opóźnienia"** – skrypt liczy zadania z terminem **przed** dziś
   (zadania z terminem na dziś nie są jeszcze traktowane jako opóźnione).

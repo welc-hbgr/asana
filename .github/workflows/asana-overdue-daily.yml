@@ -2,11 +2,11 @@ name: Codzienny raport opóźnionych tasków (Slack)
 
 on:
   schedule:
-    # W dni robocze (pon–pt) o 07:00 UTC. Latem (CEST) = 09:00, zimą (CET) =
-    # 08:00 czasu polskiego. Harmonogramy GitHub Actions bywają uruchamiane z
+    # W dni robocze (pon–pt) o 06:00 UTC. Latem (CEST) = 08:00, zimą (CET) =
+    # 07:00 czasu polskiego. Harmonogramy GitHub Actions bywają uruchamiane z
     # opóźnieniem, więc realnie wiadomość może pojawić się nieco później tego
     # samego ranka.
-    - cron: "0 7 * * 1-5"
+    - cron: "0 6 * * 1-5"
   workflow_dispatch:
     inputs:
       dry_run:
