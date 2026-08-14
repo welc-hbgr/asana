@@ -158,3 +158,71 @@ Potrzebny jest **Incoming Webhook** Slacka:
   dni robocze `0 7 * * 1-5`; np. codziennie z weekendami: `0 7 * * *`).
 - **Definicja „opóźnienia"** – skrypt liczy zadania z terminem **przed** dziś
   (zadania z terminem na dziś nie są jeszcze traktowane jako opóźnione).
+
+---
+
+# Cotygodniowy raport KPI i budżetów z Optmyzr
+
+Trzecia automatyzacja: **w każdy piątek ok. 10:00 (czasu polskiego)** przychodzi
+mailem na `welc@harbingers.io` podsumowanie **KPI** i **budżetów** dla każdego
+portfolio z Optmyzr — AS, MS, AH, PZ (lista pobierana na żywo, nowe portfolio
+dołączy samo).
+
+Dla każdego portfolia raport ma dwie tabele:
+
+- **Budżet** – miesięczny budżet z **Budget Monitora Optmyzr**, wydatek MTD,
+  % wykorzystania, oczekiwany % (wynikający z dnia miesiąca), prognoza na koniec
+  miesiąca i status 🟢/🟡/🔴.
+- **KPI** – ostatnie 7 pełnych dni vs poprzednie 7 dni: koszt, konwersje,
+  wartość konwersji, ROAS, CPC, CTR, każde ze zmianą WoW.
+
+Na górze jest sekcja **„Na już"** (tylko rzeczy wymagające reakcji), na dole
+podsumowanie zbiorcze wszystkich portfolio i lista kont bez Budget Monitora.
+
+## Czym to się różni od dwóch automatyzacji powyżej
+
+Ta **nie jest** skryptem w GitHub Actions. Dane z Optmyzr są dostępne przez
+**konektor MCP** podpięty do konta Claude, a nie przez klucz API, którego
+GitHub Actions mógłby użyć. Dlatego raport uruchamia **Routine** (zadanie
+cykliczne po stronie Claude):
+
+| | |
+|---|---|
+| Nazwa | `Optmyzr – cotygodniowy raport KPI i budżetów per portfolio` |
+| ID | `trig_01HzUTgiGRh6B5eb3HtbxryV` |
+| Harmonogram | `8 8 * * 5` (UTC) = piątek **10:08** czasu letniego / **09:08** zimowego |
+| Tryb | świeża sesja przy każdym uruchomieniu |
+| Powiadomienia | e-mail + push |
+| Treść promptu | `automations/optmyzr_weekly_kpi_budget_prompt.md` |
+
+Routine widać i można nim zarządzać w Claude → **Routines**.
+
+## Skąd biorą się budżety
+
+Z **Budget Monitorów** ustawionych w Optmyzr (`Target Value` = budżet
+miesięczny). Nic nie trzeba wpisywać w tym repo — zmiana budżetu w Optmyzr
+automatycznie wchodzi do następnego raportu.
+
+> **Konta bez Budget Monitora** trafiają do osobnej sekcji na końcu raportu,
+> z samym wydatkiem i prognozą. Żeby takie konto miało pełny wiersz budżetowy,
+> trzeba dodać mu Budget Monitor w Optmyzr.
+
+## Jak zmienić treść raportu
+
+`automations/optmyzr_weekly_kpi_budget_prompt.md` to źródło prawdy, ale
+**Routine trzyma własną kopię promptu** — sama edycja pliku nic nie zmieni.
+Po edycji poproś Claude: *„zaktualizuj prompt Routine
+`trig_01HzUTgiGRh6B5eb3HtbxryV` treścią z
+`automations/optmyzr_weekly_kpi_budget_prompt.md`"*.
+
+Zmiana dnia/godziny to `cron_expression` tego samego Routine (wyrażenie jest
+w **UTC** – latem odejmij 2 h od czasu polskiego, zimą 1 h).
+
+## Znane pułapki
+
+- **ROAS i ACOS z API Optmyzr są zawyżone ×100** (potrafią pokazać `83 024%`
+  zamiast `8,3x`). Prompt jawnie zakazuje ich używania i każe liczyć ROAS jako
+  `wartość konwersji / koszt`. Gdybyś kiedyś zobaczył w raporcie absurdalne
+  procenty — to ten błąd wrócił.
+- Raport zawsze kończy się na **wczoraj**; dzisiejszy dzień jest niepełny.
+- Sumy portfolio liczone są z surowych metryk, nie jako średnia wskaźników.
