@@ -218,6 +218,33 @@ Po edycji poproś Claude: *„zaktualizuj prompt Routine
 Zmiana dnia/godziny to `cron_expression` tego samego Routine (wyrażenie jest
 w **UTC** – latem odejmij 2 h od czasu polskiego, zimą 1 h).
 
+## Wysyłka maila
+
+Powiadomienia e-mail z Routine **nie docierają** — dlatego wysyłka jest
+odseparowana od generowania danych. Claude zapisuje liczby tygodnia do
+`reports/RRRR-MM-DD.json`, a mail wychodzi jedną z dwóch dróg:
+
+| Droga | Kiedy | Jak |
+|---|---|---|
+| **Gmail (konektor)** | domyślna | W **nowej** rozmowie z Claude (przełącznik konektora działa dopiero w świeżej sesji) poproś o wysyłkę gotowego pliku `reports/RRRR-MM-DD.email.html` |
+| **SMTP (GitHub Actions)** | gdy Gmail niedostępny | *Actions → „Wyślij raport KPI i budżetów (Optmyzr)" → Run workflow*, podaj ścieżkę do JSON-a |
+
+> Workflow SMTP wymaga, żeby plik
+> `.github/workflows/optmyzr-report-email.yml` znalazł się na **gałęzi
+> domyślnej** — GitHub nie pozwala uruchomić `workflow_dispatch` z gałęzi
+> bocznej. Dopóki ta gałąź nie jest zmergowana, zostaje droga przez Gmaila.
+
+Każdy raport leży w `reports/` w trzech postaciach: `.json` (dane źródłowe,
+wejście dla skryptu), `.email.html` (gotowy mail, style inline — do wysyłki
+przez Gmaila) i `.email.txt` (wersja tekstowa).
+
+`scripts/send_kpi_report.py` renderuje JSON do obu postaci i wysyła przez
+SMTP. Podgląd bez wysyłki:
+
+```bash
+DRY_RUN=1 REPORT_JSON=reports/2026-08-14.json python3 scripts/send_kpi_report.py
+```
+
 ## Znane pułapki
 
 - **ROAS i ACOS z API Optmyzr są zawyżone ×100** (potrafią pokazać `83 024%`

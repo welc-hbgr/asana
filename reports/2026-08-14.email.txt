@@ -1,0 +1,133 @@
+Tempo wydatków i wyniki portfoliów
+KPI 07–13.08 vs 31.07–06.08 · Budżety MTD 01–13.08 · miesiąc w 41,9% (13/31 dni) · portfolia AS, MS, AH, PZ · 42 konta
+
+NA JUŻ
+------------------------------------------------------------
+[Budżet] Optyk Kochański (PZ) wydał 67,3% budżetu przy 41,9% miesiąca. Prognoza 17 656 zł wobec 11 000 zł limitu — przekroczenie o ok. 60%, jeśli tempo się utrzyma.
+[Budżet] skalnik.pl Meta (AH) na 61,8% budżetu. Prognoza 19 884 zł wobec 13 500 zł.
+[Budżet] Drewnleś (PZ) na 53,6%. Prognoza 19 821 zł wobec 15 500 zł.
+[Wynik] Skalnik (AH) zwiększył koszt o +57% WoW, a ROAS spadł z 37,8x do 27,5x. Wartość konwersji urosła tylko o +14% — skalowanie kupuje coraz drożej.
+[Wynik] Yokaba Google (MS): konwersje −24%, ROAS 8,2x → 5,9x. Na Mecie to samo konto traci −13% konwersji.
+[Wynik] Zagranica slf24 (AH) bez konwersji: .fr, .de i .ie razem 1 401 € w tygodniu przy zerze konwersji.
+[Dane] Mi-Store.pl Meta (AS) i sklepogrodniczy.pl Meta (MS) raportują dziesiątki tysięcy konwersji tygodniowo — konfiguracja zliczania jest zepsuta i zawyża sumy portfoliów.
+
+PORTFOLIO AS
+------------------------------------------------------------
+Budżet:
+  bobowozki.pl BWG Polska AT VCM (Google) — budżet brak monitora, wydano 160 360 zł (—), prognoza 382 395 zł, brak monitora
+  Puder i Krem (Google) — budżet brak monitora, wydano 35 092 zł (—), prognoza 83 680 zł, brak monitora
+  Grail Point Ads (Google) — budżet brak monitora, wydano 18 380 zł (—), prognoza 43 829 zł, brak monitora
+  GRAILPOINT (Meta) — budżet 34 000 zł, wydano 16 880 zł (49,6%), prognoza 40 252 zł, ok
+  MiStore (Google) — budżet brak monitora, wydano 16 357 zł (—), prognoza 39 010 zł, brak monitora
+  lalkametoo.pl 2024 (Google) — budżet brak monitora, wydano 14 688 zł (—), prognoza 35 027 zł, brak monitora
+  BoboWózki (Meta) — budżet brak monitora, wydano 8 996 zł (—), prognoza 21 452 zł, brak monitora
+  RENOWA24 (Google) — budżet brak monitora, wydano 3 653 zł (—), prognoza 8 711 zł, brak monitora
+  Geek Store (Google) — budżet brak monitora, wydano 3 360 zł (—), prognoza 8 012 zł, brak monitora
+  Mi-Store.pl (Meta) — budżet brak monitora, wydano 2 843 zł (—), prognoza 6 780 zł, brak monitora
+  PORTAL OKIENNY (Google) — budżet brak monitora, wydano 2 112 zł (—), prognoza 5 036 zł, brak monitora
+  GeekStore (Meta) — budżet brak monitora, wydano 1 902 zł (—), prognoza 4 536 zł, brak monitora
+  Mi-Store.pl (Bing) — budżet brak monitora, wydano 1 712 zł (—), prognoza 4 082 zł, brak monitora
+KPI (7 dni vs poprzednie 7):
+  bobowozki.pl BWG (Google) — koszt 86 755 zł (+4,4%), konw. 570 (−4,2%), wartość 690 839 zł (−5,1%), ROAS 8,0x (−9,0%)
+  Puder i Krem (Google) — koszt 18 909 zł (0,0%), konw. 769 (−11,9%), wartość 151 357 zł (−15,2%), ROAS 8,0x (−15,0%)
+  Grail Point Ads (Google) — koszt 9 877 zł (+2,4%), konw. 557 (−9,7%), wartość 181 665 zł (0,0%), ROAS 18,4x (−2,0%)
+  GRAILPOINT (Meta) — koszt 9 138 zł (+1,8%), konw. 338 (+2,1%), wartość 272 536 zł (+23,5%), ROAS 29,8x (+21,0%)
+  MiStore (Google) — koszt 8 875 zł (+5,2%), konw. 342 (+18,8%), wartość 170 665 zł (+12,5%), ROAS 19,2x (+7,0%)
+  lalkametoo.pl 2024 (Google) — koszt 8 048 zł (+6,8%), konw. 359 (0,0%), wartość 63 187 zł (+1,4%), ROAS 7,9x (−5,0%)
+  BoboWózki (Meta) — koszt 4 727 zł (−4,1%), konw. 388 (−2,0%), wartość 244 544 zł (+3,2%), ROAS 51,7x (+8,0%)
+  RENOWA24 (Google) — koszt 2 031 zł (+11,9%), konw. 15 (+7,1%), wartość 42 795 zł (+45,6%), ROAS 21,1x (+30,0%)
+  Geek Store (Google) — koszt 2 015 zł (+33,5%), konw. 21 (+61,5%), wartość 10 216 zł (+19,9%), ROAS 5,1x (−10,0%)
+  Mi-Store.pl (Meta) — koszt 1 522 zł (−0,3%), konw. 45 871 (−5,9%), wartość 29 575 zł (−19,1%), ROAS 19,4x (−19,0%)
+  PORTAL OKIENNY (Google) — koszt 1 130 zł (+1,7%), konw. 9 (+80,0%), wartość 48 638 zł (+147,0%), ROAS 43,0x (+143,0%)
+  GeekStore (Meta) — koszt 1 050 zł (+4,6%), konw. 3 (−70,0%), wartość 3 031 zł (+72,8%), ROAS 2,9x (+65,0%)
+  Mi-Store.pl (Bing) — koszt 926 zł (+6,4%), konw. 21 (+50,0%), wartość 15 705 zł (+267,0%), ROAS 17,0x (+245,0%)
+
+PORTFOLIO MS
+------------------------------------------------------------
+Budżet:
+  Yokaba (Meta) — budżet 290 000 zł, wydano 119 167 zł (41,1%), prognoza 284 153 zł, ok
+  AMSO Sp. z o.o. (Google) — budżet 67 500 zł, wydano 29 098 zł (43,1%), prognoza 69 384 zł, ok
+  Yokaba (Google) — budżet 44 000 zł, wydano 19 569 zł (44,5%), prognoza 46 665 zł, ok
+  Sklep Farmera (Google) — budżet 37 500 zł, wydano 17 119 zł (45,7%), prognoza 40 824 zł, ok
+  Sklep Ogrodniczy (Google) — budżet 35 000 zł, wydano 13 573 zł (38,8%), prognoza 32 364 zł, ok
+  FROGUM (Google) — budżet 21 000 zł, wydano 9 547 zł (45,5%), prognoza 22 766 zł, ok
+  9d Sp. z o.o. (Google) — budżet 22 000 zł, wydano 8 834 zł (40,2%), prognoza 21 065 zł, ok
+  sklepfarmera.pl (Meta) — budżet 10 000 zł, wydano 4 951 zł (49,5%), prognoza 11 807 zł, ok
+  Yokaba DE (Meta) — budżet 7 000 zł, wydano 2 719 zł (38,8%), prognoza 6 484 zł, ok
+  sklepogrodniczy.pl (Meta) — budżet 5 500 zł, wydano 2 608 zł (47,4%), prognoza 6 219 zł, ok
+  FROGUM – Konto reklamowe (Meta) — budżet 7 250 zł, wydano 2 467 zł (34,0%), prognoza 5 883 zł, ok
+  9d sp. z o.o. (Meta · USD) — budżet 2 000 $, wydano 806 $ (40,3%), prognoza 1 922 $, ok
+  Yokaba DE (Google) — budżet 3 000 zł, wydano 792 zł (26,4%), prognoza 1 889 zł, niedowożenie
+KPI (7 dni vs poprzednie 7):
+  Yokaba (Meta) — koszt 62 109 zł (−5,5%), konw. 2 421 (−12,7%), wartość 221 337 zł (−9,9%), ROAS 3,6x (−5,0%)
+  AMSO Sp. z o.o. (Google) — koszt 17 205 zł (+33,3%), konw. 619 (−0,5%), wartość 265 476 zł (+8,7%), ROAS 15,4x (−18,0%)
+  Yokaba (Google) — koszt 10 763 zł (+7,5%), konw. 351 (−24,2%), wartość 63 862 zł (−22,0%), ROAS 5,9x (−27,0%)
+  Sklep Farmera (Google) — koszt 9 284 zł (+4,8%), konw. 136 (−11,1%), wartość 69 047 zł (−15,9%), ROAS 7,4x (−20,0%)
+  Sklep Ogrodniczy (Google) — koszt 7 499 zł (+8,9%), konw. 380 (−12,2%), wartość 70 767 zł (−14,0%), ROAS 9,4x (−21,0%)
+  FROGUM (Google) — koszt 5 100 zł (+1,4%), konw. 121 (+10,0%), wartość 24 024 zł (+2,3%), ROAS 4,7x (+1,0%)
+  9d Sp. z o.o. (Google) — koszt 4 933 zł (+6,7%), konw. 14 (+16,7%), wartość 19 691 zł (−32,8%), ROAS 4,0x (−37,0%)
+  sklepfarmera.pl (Meta) — koszt 2 440 zł (−17,0%), konw. 68 (−10,5%), wartość 28 915 zł (+17,9%), ROAS 11,9x (+42,0%)
+  Yokaba DE (Meta) — koszt 1 381 zł (−11,3%), konw. 4 (−50,0%), wartość 735 zł (−62,7%), ROAS 0,5x (−58,0%)
+  FROGUM – Konto rekl. (Meta) — koszt 1 309 zł (+6,3%), konw. 22 (+57,1%), wartość 4 435 zł (+24,5%), ROAS 3,4x (+17,0%)
+  sklepogrodniczy.pl (Meta) — koszt 1 262 zł (−20,3%), konw. 70 487 (−13,7%), wartość 10 012 zł (−32,6%), ROAS 7,9x (−15,0%)
+  Yokaba DE (Google) — koszt 410 zł (−8,3%), konw. 3 (−57,1%), wartość 634 zł (−58,2%), ROAS 1,5x (−54,0%)
+  9d sp. z o.o. (Meta · USD) — koszt 436 $ (+1,4%), konw. 157 327 (−7,5%), wartość 3 059 $ (+893,0%), ROAS 7,0x (+880,0%)
+
+PORTFOLIO AH
+------------------------------------------------------------
+Budżet:
+  Skalnik (Google) — budżet 106 000 zł, wydano 38 852 zł (36,7%), prognoza 92 646 zł, ok
+  przesylarka.pl [aktiv] (Google) — budżet brak monitora, wydano 12 562 zł (—), prognoza 29 956 zł, brak monitora
+  Brubeck (Google) — budżet 20 000 zł, wydano 9 965 zł (49,8%), prognoza 23 762 zł, ok
+  skalnik.pl (Meta) — budżet 13 500 zł, wydano 8 338 zł (61,8%), prognoza 19 884 zł, przepalanie
+  slf24.pl (Google) — budżet brak monitora, wydano 6 416 zł (—), prognoza 15 300 zł, brak monitora
+  BRUBECK18 (Meta) — budżet 11 000 zł, wydano 3 668 zł (33,3%), prognoza 8 747 zł, ok
+  slf24.co.uk (Google · GBP) — budżet brak monitora, wydano 2 921 £ (—), prognoza 6 966 £, brak monitora
+  slf24.ie (Google · EUR) — budżet brak monitora, wydano 1 048 € (—), prognoza 2 499 €, brak monitora
+  slf24.de (Google · EUR) — budżet brak monitora, wydano 742 € (—), prognoza 1 769 €, brak monitora
+  slf24.fr (Google · EUR) — budżet brak monitora, wydano 587 € (—), prognoza 1 400 €, brak monitora
+KPI (7 dni vs poprzednie 7):
+  Skalnik (Google) — koszt 24 136 zł (+57,0%), konw. 1 255 (+9,2%), wartość 664 371 zł (+14,3%), ROAS 27,5x (−27,0%)
+  przesylarka.pl (Google) — koszt 6 581 zł (−2,5%), konw. 333 (−13,7%), wartość 48 142 zł (−19,3%), ROAS 7,3x (−17,0%)
+  Brubeck (Google) — koszt 5 442 zł (+6,3%), konw. 94 (−28,8%), wartość 29 072 zł (−25,4%), ROAS 5,3x (−30,0%)
+  skalnik.pl (Meta) — koszt 4 436 zł (+5,7%), konw. 1 201 (−77,4%), wartość 491 638 zł (+61,6%), ROAS 110,8x (+53,0%)
+  slf24.pl (Google) — koszt 3 306 zł (−4,7%), konw. 2 (−50,0%), wartość 7 748 zł (−62,6%), ROAS 2,3x (−61,0%)
+  BRUBECK18 (Meta) — koszt 1 941 zł (−5,6%), konw. 85 (+44,1%), wartość 25 457 zł (+25,5%), ROAS 13,1x (+33,0%)
+  slf24.co.uk (Google · GBP) — koszt 1 593 £ (+6,8%), konw. 3 (−40,0%), wartość 1 577 £ (−72,7%), ROAS 1,0x (−74,0%)
+  slf24.ie (Google · EUR) — koszt 541 € (−6,6%), konw. 0 (−100,0%), wartość 0 € (−100,0%), ROAS 0,0x (−100,0%)
+  slf24.de (Google · EUR) — koszt 512 € (+88,2%), konw. 0 (n/d), wartość 0 € (n/d), ROAS 0,0x (n/d)
+  slf24.fr (Google · EUR) — koszt 348 € (+25,6%), konw. 0 (−100,0%), wartość 0 € (−100,0%), ROAS 0,0x (−100,0%)
+
+PORTFOLIO PZ
+------------------------------------------------------------
+Budżet:
+  Drewnleś - stare (Google) — budżet 15 500 zł, wydano 8 312 zł (53,6%), prognoza 19 821 zł, przepalanie
+  Optyk Kochański (Google) — budżet 11 000 zł, wydano 7 404 zł (67,3%), prognoza 17 656 zł, przepalanie
+  Buduj24 (Google) — budżet 17 000 zł, wydano 7 315 zł (43,0%), prognoza 17 443 zł, ok
+  darymex.pl (Google) — budżet 14 000 zł, wydano 5 094 zł (36,4%), prognoza 12 147 zł, ok
+  Darymex (Meta) — budżet brak monitora, wydano 2 748 zł (—), prognoza 6 553 zł, brak monitora
+  KOSdesign (Google) — budżet brak monitora, wydano 789 zł (—), prognoza 1 881 zł, brak monitora
+KPI (7 dni vs poprzednie 7):
+  Drewnleś - stare (Google) — koszt 4 842 zł (+20,2%), konw. 176 (−15,4%), wartość 49 994 zł (−30,6%), ROAS 10,3x (−42,0%)
+  Buduj24 (Google) — koszt 4 326 zł (+21,3%), konw. 134 (−10,1%), wartość 34 739 zł (−3,3%), ROAS 8,0x (−20,0%)
+  Optyk Kochański (Google) — koszt 4 229 zł (+8,5%), konw. 32 (−25,6%), wartość 17 819 zł (+37,4%), ROAS 4,2x (+27,0%)
+  darymex.pl (Google) — koszt 2 725 zł (−0,7%), konw. 111 (+22,0%), wartość 23 878 zł (+11,0%), ROAS 8,8x (+12,0%)
+  Darymex (Meta) — koszt 1 448 zł (−4,4%), konw. 1 959 (−2,8%), wartość 0 zł (n/d), ROAS 0,0x (n/d)
+  KOSdesign (Google) — koszt 491 zł (+39,5%), konw. 1 (−50,0%), wartość 37 zł (−99,4%), ROAS 0,1x (−100,0%)
+
+KONTA BEZ BUDGET MONITORA
+------------------------------------------------------------
+  - AS — 12 z 13 kont: bobowozki.pl BWG, Puder i Krem, Grail Point Ads, MiStore, lalkametoo.pl, BoboWózki (Meta), RENOWA24, Geek Store, Mi-Store.pl (Meta), PORTAL OKIENNY, GeekStore (Meta), Mi-Store.pl (Bing). Łącznie 269 455 zł wydatku MTD bez żadnego limitu.
+  - AH — 6 kont: przesylarka.pl, slf24.pl, slf24.co.uk, slf24.ie, slf24.de, slf24.fr.
+  - PZ — 2 konta: Darymex (Meta), KOSdesign.
+  - MS — komplet, wszystkie 13 kont ma monitor.
+  - Dodanie monitora w Optmyzr to jedyny warunek, żeby konto dostało pełny wiersz budżetowy w kolejnych raportach — kwoty czytane są wprost z ustawień.
+
+ZASTRZEŻENIA DO DANYCH
+------------------------------------------------------------
+  - Zawyżone zliczanie konwersji — Mi-Store.pl (Meta, AS), sklepogrodniczy.pl (Meta, MS) i 9d sp. z o.o. (Meta, MS) raportują dziesiątki tysięcy konwersji tygodniowo przy kilkudziesięciu tysiącach kliknięć. Sumy konwersji AS i MS są przez to bezużyteczne; koszt i wartość konwersji pozostają wiarygodne.
+  - Brak wartości konwersji — Darymex (Meta, PZ) zlicza konwersje, ale nie przekazuje ich wartości, więc ROAS wychodzi zerowy.
+  - Wiele walut — AH łączy PLN, GBP i EUR, MS ma jedno konto w USD. Sumy portfoliów obejmują wyłącznie konta w PLN; pozostałe mają własne wiersze i nie są przeliczane.
+  - ROAS liczony ręcznie — kolumny ROAS i ACOS zwracane przez Optmyzr są zawyżone stukrotnie, więc wszystkie wartości w raporcie pochodzą z dzielenia wartości konwersji przez koszt.
+
+Źródło: Optmyzr — account performance (poziom portfolio) i Budget Monitors. Prognoza = wydatek MTD ÷ 13 dni × 31 dni. Oczekiwane tempo = 41,9%. Próg statusu: ±10 pp odchylenia. Wygenerowano 14.08.2026.
