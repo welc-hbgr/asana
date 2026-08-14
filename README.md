@@ -116,22 +116,36 @@ Wymaga Pythona 3.9+ (skrypt korzysta tylko z biblioteki standardowej).
 # Codzienny raport opóźnionych tasków (Slack)
 
 Druga automatyzacja: **w dni robocze (pon–pt) rano (~09:00 czasu polskiego)**
-wysyła na **Slacka** listę **opóźnionych** zadań (niezakończonych, z terminem,
-który już minął) dla zespołu, pogrupowaną po osobach.
+wysyła listę **opóźnionych** zadań (niezakończonych, z terminem, który już
+minął) dla zespołu, pogrupowaną po osobach. Wysyłka idzie **e-mailem i/lub na
+Slacka** — na te kanały, które są skonfigurowane.
 
 Domyślny zespół: Aleksandra Ster, Marcel Szydło, Adrian Horowski,
 Przemysław Żywicki.
 
 - `scripts/asana_overdue_tasks.py` – jednym zapytaniem do wyszukiwarki Asany
-  pobiera niezakończone zadania z terminem przed dzisiaj i wysyła je na Slacka.
+  pobiera niezakończone zadania z terminem przed dzisiaj i wysyła je mailem
+  (SMTP) oraz/lub na Slacka (Incoming Webhook).
 - `.github/workflows/asana-overdue-daily.yml` – cron w dni robocze (pon–pt)
   o `07:00 UTC` (= 09:00 latem / 08:00 zimą) oraz uruchomienie na żądanie.
 
-## Konfiguracja Slacka (jednorazowo)
+## Kanały wysyłki
+
+Wystarczy jeden; można oba naraz. Jeśli żaden nie jest skonfigurowany, skrypt
+kończy się błędem.
+
+- **E-mail** – korzysta z tych samych sekretów SMTP co raport RBH
+  (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_TO`).
+  Nic dodatkowego nie trzeba ustawiać — działa od razu.
+- **Slack** – opcjonalnie, po dodaniu sekretu `SLACK_WEBHOOK_URL` (instrukcja
+  niżej). Gdy jest ustawiony, raport leci i na maila, i na Slacka.
+
+## Konfiguracja Slacka (opcjonalnie)
 
 Potrzebny jest **Incoming Webhook** Slacka:
 
-1. Wejdź na <https://api.slack.com/apps> → **Create New App** → *From scratch*.
+1. Wejdź na <https://api.slack.com/apps> → **Create New App** → *Blank app*
+   (dawne „From scratch").
 2. Nadaj nazwę (np. „Asana Opóźnienia"), wybierz swój workspace Slacka.
 3. W menu **Incoming Webhooks** → przełącz **Activate Incoming Webhooks** na *On*.
 4. **Add New Webhook to Workspace** → wybierz kanał (lub swoje DM) → **Allow**.
@@ -147,8 +161,9 @@ Potrzebny jest **Incoming Webhook** Slacka:
 ## Test
 
 *Actions → „Codzienny raport opóźnionych tasków (Slack)" → Run workflow*:
-- `dry_run = true` → wiadomość tylko wypisze się w logach (bez Slacka),
-- `dry_run = false` → wyśle prawdziwą wiadomość na skonfigurowany kanał.
+- `dry_run = true` → wiadomość tylko wypisze się w logach (bez wysyłki),
+- `dry_run = false` → wyśle prawdziwą wiadomość na skonfigurowane kanały
+  (e-mail i/lub Slack).
 
 ## Dostosowanie
 
