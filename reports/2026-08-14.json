@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "subject": "Raport KPI i budżety per portfolio — 7–13.08.2026",
+    "title": "Tempo wydatków i wyniki portfoliów",
+    "subtitle": "KPI 07–13.08 vs 31.07–06.08 · Budżety MTD 01–13.08 · miesiąc w 41,9% (13/31 dni) · portfolia AS, MS, AH, PZ · 42 konta",
+    "footer": "Źródło: Optmyzr — account performance (poziom portfolio) i Budget Monitors. Prognoza = wydatek MTD ÷ 13 dni × 31 dni. Oczekiwane tempo = 41,9%. Próg statusu: ±10 pp odchylenia. Wygenerowano 14.08.2026."
+  },
+  "alerts": [
+    {"sev": "crit", "text": "<b>Optyk Kochański</b> (PZ) wydał 67,3% budżetu przy 41,9% miesiąca. Prognoza 17 656 zł wobec 11 000 zł limitu — przekroczenie o ok. 60%, jeśli tempo się utrzyma."},
+    {"sev": "crit", "text": "<b>skalnik.pl</b> Meta (AH) na 61,8% budżetu. Prognoza 19 884 zł wobec 13 500 zł."},
+    {"sev": "crit", "text": "<b>Drewnleś</b> (PZ) na 53,6%. Prognoza 19 821 zł wobec 15 500 zł."},
+    {"sev": "warn", "text": "<b>Skalnik</b> (AH) zwiększył koszt o +57% WoW, a ROAS spadł z 37,8x do 27,5x. Wartość konwersji urosła tylko o +14% — skalowanie kupuje coraz drożej."},
+    {"sev": "warn", "text": "<b>Yokaba</b> Google (MS): konwersje −24%, ROAS 8,2x → 5,9x. Na Mecie to samo konto traci −13% konwersji."},
+    {"sev": "warn", "text": "Zagranica <b>slf24</b> (AH) bez konwersji: .fr, .de i .ie razem 1 401 € w tygodniu przy zerze konwersji."},
+    {"sev": "info", "text": "<b>Mi-Store.pl</b> Meta (AS) i <b>sklepogrodniczy.pl</b> Meta (MS) raportują dziesiątki tysięcy konwersji tygodniowo — konfiguracja zliczania jest zepsuta i zawyża sumy portfoliów."}
+  ],
+  "summary": "<b>Razem (tylko konta w PLN):</b> koszt 7 dni 342 601 zł (+5,6%), wartość konwersji 4 096 583 zł (+5,9%), ROAS 11,96x (+0,2%). Wydatek MTD 628 242 zł. Sumarycznie stabilnie, ale rozjazd jest wewnątrz: MS −8% ROAS, PZ −24%. Kont w GBP, EUR i USD nie doliczono — mają własne wiersze i nie są przeliczane.",
+  "portfolios": [
+    {
+      "name": "AS",
+      "budget": [
+        {"acct": "bobowozki.pl BWG Polska AT VCM", "plat": "Google", "budget": null, "spent": 160360, "used": null, "dev": null, "forecast": 382395, "status": "none"},
+        {"acct": "Puder i Krem", "plat": "Google", "budget": null, "spent": 35092, "used": null, "dev": null, "forecast": 83680, "status": "none"},
+        {"acct": "Grail Point Ads", "plat": "Google", "budget": null, "spent": 18380, "used": null, "dev": null, "forecast": 43829, "status": "none"},
+        {"acct": "GRAILPOINT", "plat": "Meta", "budget": 34000, "spent": 16880, "used": 49.6, "dev": 7.7, "forecast": 40252, "status": "ok"},
+        {"acct": "MiStore", "plat": "Google", "budget": null, "spent": 16357, "used": null, "dev": null, "forecast": 39010, "status": "none"},
+        {"acct": "lalkametoo.pl 2024", "plat": "Google", "budget": null, "spent": 14688, "used": null, "dev": null, "forecast": 35027, "status": "none"},
+        {"acct": "BoboWózki", "plat": "Meta", "budget": null, "spent": 8996, "used": null, "dev": null, "forecast": 21452, "status": "none"},
+        {"acct": "RENOWA24", "plat": "Google", "budget": null, "spent": 3653, "used": null, "dev": null, "forecast": 8711, "status": "none"},
+        {"acct": "Geek Store", "plat": "Google", "budget": null, "spent": 3360, "used": null, "dev": null, "forecast": 8012, "status": "none"},
+        {"acct": "Mi-Store.pl", "plat": "Meta", "budget": null, "spent": 2843, "used": null, "dev": null, "forecast": 6780, "status": "none"},
+        {"acct": "PORTAL OKIENNY", "plat": "Google", "budget": null, "spent": 2112, "used": null, "dev": null, "forecast": 5036, "status": "none"},
+        {"acct": "GeekStore", "plat": "Meta", "budget": null, "spent": 1902, "used": null, "dev": null, "forecast": 4536, "status": "none"},
+        {"acct": "Mi-Store.pl", "plat": "Bing", "budget": null, "spent": 1712, "used": null, "dev": null, "forecast": 4082, "status": "none"}
+      ],
+      "budget_total": {"acct": "Razem AS", "budget": 34000, "spent": 286335, "used": null, "forecast": 682802},
+      "budget_note": "Tylko 1 z 13 kont ma Budget Monitor. Prognozy pozostałych to ekstrapolacja tempa wydatków, bez limitu do porównania — 269 455 zł wydatku MTD idzie bez żadnej kontroli budżetu.",
+      "kpi": [
+        {"acct": "bobowozki.pl BWG", "plat": "Google", "cost": 86755, "dcost": 4.4, "conv": 570, "dconv": -4.2, "val": 690839, "dval": -5.1, "roas": 8.0, "droas": -9.0, "cpc": 1.32, "ctr": 2.22},
+        {"acct": "Puder i Krem", "plat": "Google", "cost": 18909, "dcost": 0.0, "conv": 769, "dconv": -11.9, "val": 151357, "dval": -15.2, "roas": 8.0, "droas": -15.0, "cpc": 1.19, "ctr": 2.04},
+        {"acct": "Grail Point Ads", "plat": "Google", "cost": 9877, "dcost": 2.4, "conv": 557, "dconv": -9.7, "val": 181665, "dval": 0.0, "roas": 18.4, "droas": -2.0, "cpc": 0.45, "ctr": 3.37},
+        {"acct": "GRAILPOINT", "plat": "Meta", "cost": 9138, "dcost": 1.8, "conv": 338, "dconv": 2.1, "val": 272536, "dval": 23.5, "roas": 29.8, "droas": 21.0, "cpc": 0.38, "ctr": 2.32},
+        {"acct": "MiStore", "plat": "Google", "cost": 8875, "dcost": 5.2, "conv": 342, "dconv": 18.8, "val": 170665, "dval": 12.5, "roas": 19.2, "droas": 7.0, "cpc": 0.72, "ctr": 3.57},
+        {"acct": "lalkametoo.pl 2024", "plat": "Google", "cost": 8048, "dcost": 6.8, "conv": 359, "dconv": 0.0, "val": 63187, "dval": 1.4, "roas": 7.9, "droas": -5.0, "cpc": 1.08, "ctr": 2.66},
+        {"acct": "BoboWózki", "plat": "Meta", "cost": 4727, "dcost": -4.1, "conv": 388, "dconv": -2.0, "val": 244544, "dval": 3.2, "roas": 51.7, "droas": 8.0, "cpc": 0.33, "ctr": 2.17},
+        {"acct": "RENOWA24", "plat": "Google", "cost": 2031, "dcost": 11.9, "conv": 15, "dconv": 7.1, "val": 42795, "dval": 45.6, "roas": 21.1, "droas": 30.0, "cpc": 0.97, "ctr": 2.36},
+        {"acct": "Geek Store", "plat": "Google", "cost": 2015, "dcost": 33.5, "conv": 21, "dconv": 61.5, "val": 10216, "dval": 19.9, "roas": 5.1, "droas": -10.0, "cpc": 2.58, "ctr": 0.85},
+        {"acct": "Mi-Store.pl", "plat": "Meta", "cost": 1522, "dcost": -0.3, "conv": 45871, "dconv": -5.9, "val": 29575, "dval": -19.1, "roas": 19.4, "droas": -19.0, "cpc": 0.75, "ctr": 0.94},
+        {"acct": "PORTAL OKIENNY", "plat": "Google", "cost": 1130, "dcost": 1.7, "conv": 9, "dconv": 80.0, "val": 48638, "dval": 147.0, "roas": 43.0, "droas": 143.0, "cpc": 0.88, "ctr": 2.19},
+        {"acct": "GeekStore", "plat": "Meta", "cost": 1050, "dcost": 4.6, "conv": 3, "dconv": -70.0, "val": 3031, "dval": 72.8, "roas": 2.9, "droas": 65.0, "cpc": 1.19, "ctr": 2.33},
+        {"acct": "Mi-Store.pl", "plat": "Bing", "cost": 926, "dcost": 6.4, "conv": 21, "dconv": 50.0, "val": 15705, "dval": 267.0, "roas": 17.0, "droas": 245.0, "cpc": 0.75, "ctr": 4.51}
+      ],
+      "kpi_total": {"acct": "Razem AS", "plat": "", "cost": 155003, "dcost": 3.7, "conv": 49263, "dconv": -5.7, "val": 1924753, "dval": 3.5, "roas": 12.4, "droas": -0.2, "cpc": null, "ctr": null},
+      "kpi_note": "Suma konwersji jest zdominowana przez Mi-Store.pl Meta (45 871 z 49 263) — to artefakt konfiguracji, nie realne zamówienia."
+    },
+    {
+      "name": "MS",
+      "budget": [
+        {"acct": "Yokaba", "plat": "Meta", "budget": 290000, "spent": 119167, "used": 41.1, "dev": -0.8, "forecast": 284153, "status": "ok"},
+        {"acct": "AMSO Sp. z o.o.", "plat": "Google", "budget": 67500, "spent": 29098, "used": 43.1, "dev": 1.2, "forecast": 69384, "status": "ok"},
+        {"acct": "Yokaba", "plat": "Google", "budget": 44000, "spent": 19569, "used": 44.5, "dev": 2.6, "forecast": 46665, "status": "ok"},
+        {"acct": "Sklep Farmera", "plat": "Google", "budget": 37500, "spent": 17119, "used": 45.7, "dev": 3.8, "forecast": 40824, "status": "ok"},
+        {"acct": "Sklep Ogrodniczy", "plat": "Google", "budget": 35000, "spent": 13573, "used": 38.8, "dev": -3.1, "forecast": 32364, "status": "ok"},
+        {"acct": "FROGUM", "plat": "Google", "budget": 21000, "spent": 9547, "used": 45.5, "dev": 3.6, "forecast": 22766, "status": "ok"},
+        {"acct": "9d Sp. z o.o.", "plat": "Google", "budget": 22000, "spent": 8834, "used": 40.2, "dev": -1.7, "forecast": 21065, "status": "ok"},
+        {"acct": "sklepfarmera.pl", "plat": "Meta", "budget": 10000, "spent": 4951, "used": 49.5, "dev": 7.6, "forecast": 11807, "status": "ok"},
+        {"acct": "Yokaba DE", "plat": "Meta", "budget": 7000, "spent": 2719, "used": 38.8, "dev": -3.1, "forecast": 6484, "status": "ok"},
+        {"acct": "sklepogrodniczy.pl", "plat": "Meta", "budget": 5500, "spent": 2608, "used": 47.4, "dev": 5.5, "forecast": 6219, "status": "ok"},
+        {"acct": "FROGUM – Konto reklamowe", "plat": "Meta", "budget": 7250, "spent": 2467, "used": 34.0, "dev": -7.9, "forecast": 5883, "status": "ok"},
+        {"acct": "9d sp. z o.o.", "plat": "Meta · USD", "cur": "$", "budget": 2000, "spent": 806, "used": 40.3, "dev": -1.6, "forecast": 1922, "status": "ok"},
+        {"acct": "Yokaba DE", "plat": "Google", "budget": 3000, "spent": 792, "used": 26.4, "dev": -15.5, "forecast": 1889, "status": "under"}
+      ],
+      "budget_total": {"acct": "Razem MS (bez konta USD)", "budget": 549750, "spent": 230444, "used": 41.9, "forecast": 549503},
+      "budget_note": "Jedyne portfolio z pełnym pokryciem Budget Monitorami — wszystkie 13 kont ma limit, a tempo całości jest praktycznie idealne (41,9% wobec 41,9% oczekiwanych).",
+      "kpi": [
+        {"acct": "Yokaba", "plat": "Meta", "cost": 62109, "dcost": -5.5, "conv": 2421, "dconv": -12.7, "val": 221337, "dval": -9.9, "roas": 3.6, "droas": -5.0, "cpc": 0.76, "ctr": 2.21},
+        {"acct": "AMSO Sp. z o.o.", "plat": "Google", "cost": 17205, "dcost": 33.3, "conv": 619, "dconv": -0.5, "val": 265476, "dval": 8.7, "roas": 15.4, "droas": -18.0, "cpc": 0.56, "ctr": 2.25},
+        {"acct": "Yokaba", "plat": "Google", "cost": 10763, "dcost": 7.5, "conv": 351, "dconv": -24.2, "val": 63862, "dval": -22.0, "roas": 5.9, "droas": -27.0, "cpc": 0.79, "ctr": 3.96},
+        {"acct": "Sklep Farmera", "plat": "Google", "cost": 9284, "dcost": 4.8, "conv": 136, "dconv": -11.1, "val": 69047, "dval": -15.9, "roas": 7.4, "droas": -20.0, "cpc": 0.62, "ctr": 2.07},
+        {"acct": "Sklep Ogrodniczy", "plat": "Google", "cost": 7499, "dcost": 8.9, "conv": 380, "dconv": -12.2, "val": 70767, "dval": -14.0, "roas": 9.4, "droas": -21.0, "cpc": 0.44, "ctr": 2.36},
+        {"acct": "FROGUM", "plat": "Google", "cost": 5100, "dcost": 1.4, "conv": 121, "dconv": 10.0, "val": 24024, "dval": 2.3, "roas": 4.7, "droas": 1.0, "cpc": 1.32, "ctr": 2.16},
+        {"acct": "9d Sp. z o.o.", "plat": "Google", "cost": 4933, "dcost": 6.7, "conv": 14, "dconv": 16.7, "val": 19691, "dval": -32.8, "roas": 4.0, "droas": -37.0, "cpc": 1.11, "ctr": 1.35},
+        {"acct": "sklepfarmera.pl", "plat": "Meta", "cost": 2440, "dcost": -17.0, "conv": 68, "dconv": -10.5, "val": 28915, "dval": 17.9, "roas": 11.9, "droas": 42.0, "cpc": 0.60, "ctr": 1.36},
+        {"acct": "Yokaba DE", "plat": "Meta", "cost": 1381, "dcost": -11.3, "conv": 4, "dconv": -50.0, "val": 735, "dval": -62.7, "roas": 0.5, "droas": -58.0, "cpc": 3.34, "ctr": 2.37},
+        {"acct": "FROGUM – Konto rekl.", "plat": "Meta", "cost": 1309, "dcost": 6.3, "conv": 22, "dconv": 57.1, "val": 4435, "dval": 24.5, "roas": 3.4, "droas": 17.0, "cpc": 0.60, "ctr": 0.92},
+        {"acct": "sklepogrodniczy.pl", "plat": "Meta", "cost": 1262, "dcost": -20.3, "conv": 70487, "dconv": -13.7, "val": 10012, "dval": -32.6, "roas": 7.9, "droas": -15.0, "cpc": 0.43, "ctr": 1.29},
+        {"acct": "Yokaba DE", "plat": "Google", "cost": 410, "dcost": -8.3, "conv": 3, "dconv": -57.1, "val": 634, "dval": -58.2, "roas": 1.5, "droas": -54.0, "cpc": 1.79, "ctr": 1.44},
+        {"acct": "9d sp. z o.o.", "plat": "Meta · USD", "cur": "$", "cost": 436, "dcost": 1.4, "conv": 157327, "dconv": -7.5, "val": 3059, "dval": 893.0, "roas": 7.0, "droas": 880.0, "cpc": 0.16, "ctr": 0.88}
+      ],
+      "kpi_total": {"acct": "Razem MS (bez konta USD)", "plat": "", "cost": 123695, "dcost": 1.6, "conv": 74626, "dconv": -13.6, "val": 778935, "dval": -6.8, "roas": 6.3, "droas": -8.0, "cpc": null, "ctr": null},
+      "kpi_note": "Osiem z trzynastu kont ma ujemną dynamikę wartości konwersji. Yokaba DE na obu platformach schodzi poniżej ROAS 2x przy rosnącym CPC."
+    },
+    {
+      "name": "AH",
+      "budget": [
+        {"acct": "Skalnik", "plat": "Google", "budget": 106000, "spent": 38852, "used": 36.7, "dev": -5.3, "forecast": 92646, "status": "ok"},
+        {"acct": "przesylarka.pl [aktiv]", "plat": "Google", "budget": null, "spent": 12562, "used": null, "dev": null, "forecast": 29956, "status": "none"},
+        {"acct": "Brubeck", "plat": "Google", "budget": 20000, "spent": 9965, "used": 49.8, "dev": 7.9, "forecast": 23762, "status": "ok"},
+        {"acct": "skalnik.pl", "plat": "Meta", "budget": 13500, "spent": 8338, "used": 61.8, "dev": 19.9, "forecast": 19884, "status": "over"},
+        {"acct": "slf24.pl", "plat": "Google", "budget": null, "spent": 6416, "used": null, "dev": null, "forecast": 15300, "status": "none"},
+        {"acct": "BRUBECK18", "plat": "Meta", "budget": 11000, "spent": 3668, "used": 33.3, "dev": -8.6, "forecast": 8747, "status": "ok"},
+        {"acct": "slf24.co.uk", "plat": "Google · GBP", "cur": "£", "budget": null, "spent": 2921, "used": null, "dev": null, "forecast": 6966, "status": "none"},
+        {"acct": "slf24.ie", "plat": "Google · EUR", "cur": "€", "budget": null, "spent": 1048, "used": null, "dev": null, "forecast": 2499, "status": "none"},
+        {"acct": "slf24.de", "plat": "Google · EUR", "cur": "€", "budget": null, "spent": 742, "used": null, "dev": null, "forecast": 1769, "status": "none"},
+        {"acct": "slf24.fr", "plat": "Google · EUR", "cur": "€", "budget": null, "spent": 587, "used": null, "dev": null, "forecast": 1400, "status": "none"}
+      ],
+      "budget_total": {"acct": "Razem AH (tylko PLN)", "budget": 150500, "spent": 79801, "used": null, "forecast": 190295},
+      "budget_note": "Portfolio miesza cztery waluty — sumy obejmują wyłącznie konta w PLN, a suma budżetów dotyczy tylko czterech kont z monitorem. Sześć kont slf24 i przesylarka nie ma limitów i odpowiada za 18 978 zł plus 2 921 £ i 2 377 € wydatku MTD.",
+      "kpi": [
+        {"acct": "Skalnik", "plat": "Google", "cost": 24136, "dcost": 57.0, "conv": 1255, "dconv": 9.2, "val": 664371, "dval": 14.3, "roas": 27.5, "droas": -27.0, "cpc": 0.66, "ctr": 2.75},
+        {"acct": "przesylarka.pl", "plat": "Google", "cost": 6581, "dcost": -2.5, "conv": 333, "dconv": -13.7, "val": 48142, "dval": -19.3, "roas": 7.3, "droas": -17.0, "cpc": 1.24, "ctr": 4.62},
+        {"acct": "Brubeck", "plat": "Google", "cost": 5442, "dcost": 6.3, "conv": 94, "dconv": -28.8, "val": 29072, "dval": -25.4, "roas": 5.3, "droas": -30.0, "cpc": 0.54, "ctr": 4.04},
+        {"acct": "skalnik.pl", "plat": "Meta", "cost": 4436, "dcost": 5.7, "conv": 1201, "dconv": -77.4, "val": 491638, "dval": 61.6, "roas": 110.8, "droas": 53.0, "cpc": 0.34, "ctr": 2.49},
+        {"acct": "slf24.pl", "plat": "Google", "cost": 3306, "dcost": -4.7, "conv": 2, "dconv": -50.0, "val": 7748, "dval": -62.6, "roas": 2.3, "droas": -61.0, "cpc": 2.00, "ctr": 1.78},
+        {"acct": "BRUBECK18", "plat": "Meta", "cost": 1941, "dcost": -5.6, "conv": 85, "dconv": 44.1, "val": 25457, "dval": 25.5, "roas": 13.1, "droas": 33.0, "cpc": 0.55, "ctr": 2.11},
+        {"acct": "slf24.co.uk", "plat": "Google · GBP", "cur": "£", "cost": 1593, "dcost": 6.8, "conv": 3, "dconv": -40.0, "val": 1577, "dval": -72.7, "roas": 1.0, "droas": -74.0, "cpc": 0.86, "ctr": 1.60},
+        {"acct": "slf24.ie", "plat": "Google · EUR", "cur": "€", "cost": 541, "dcost": -6.6, "conv": 0, "dconv": -100.0, "val": 0, "dval": -100.0, "roas": 0.0, "droas": -100.0, "cpc": 0.27, "ctr": 1.83},
+        {"acct": "slf24.de", "plat": "Google · EUR", "cur": "€", "cost": 512, "dcost": 88.2, "conv": 0, "dconv": null, "val": 0, "dval": null, "roas": 0.0, "droas": null, "cpc": 1.01, "ctr": 1.28},
+        {"acct": "slf24.fr", "plat": "Google · EUR", "cur": "€", "cost": 348, "dcost": 25.6, "conv": 0, "dconv": -100.0, "val": 0, "dval": -100.0, "roas": 0.0, "droas": -100.0, "cpc": 0.24, "ctr": 1.73}
+      ],
+      "kpi_total": {"acct": "Razem AH (tylko PLN)", "plat": "", "cost": 45842, "dcost": 24.0, "conv": 2970, "dconv": -57.8, "val": 1266428, "dval": 23.6, "roas": 27.6, "droas": -0.4, "cpc": null, "ctr": null},
+      "kpi_note": "Spadek konwersji portfolia o −57,8% to niemal w całości skalnik.pl Meta (5 305 → 1 201) — przy jednoczesnym wzroście wartości konwersji o +61,6%. To wygląda na zmianę modelu atrybucji lub zdarzenia konwersji, nie na realny spadek sprzedaży."
+    },
+    {
+      "name": "PZ",
+      "budget": [
+        {"acct": "Drewnleś - stare", "plat": "Google", "budget": 15500, "spent": 8312, "used": 53.6, "dev": 11.7, "forecast": 19821, "status": "over"},
+        {"acct": "Optyk Kochański", "plat": "Google", "budget": 11000, "spent": 7404, "used": 67.3, "dev": 25.4, "forecast": 17656, "status": "over"},
+        {"acct": "Buduj24", "plat": "Google", "budget": 17000, "spent": 7315, "used": 43.0, "dev": 1.1, "forecast": 17443, "status": "ok"},
+        {"acct": "darymex.pl", "plat": "Google", "budget": 14000, "spent": 5094, "used": 36.4, "dev": -5.5, "forecast": 12147, "status": "ok"},
+        {"acct": "Darymex", "plat": "Meta", "budget": null, "spent": 2748, "used": null, "dev": null, "forecast": 6553, "status": "none"},
+        {"acct": "KOSdesign", "plat": "Google", "budget": null, "spent": 789, "used": null, "dev": null, "forecast": 1881, "status": "none"}
+      ],
+      "budget_total": {"acct": "Razem PZ", "budget": 57500, "spent": 31662, "used": null, "forecast": 75501},
+      "budget_note": "Dwa z czterech monitorowanych kont przepalają. Łączna prognoza kont z limitem (67 067 zł) przekracza sumę ich budżetów (57 500 zł) o 17%.",
+      "kpi": [
+        {"acct": "Drewnleś - stare", "plat": "Google", "cost": 4842, "dcost": 20.2, "conv": 176, "dconv": -15.4, "val": 49994, "dval": -30.6, "roas": 10.3, "droas": -42.0, "cpc": 0.53, "ctr": 3.53},
+        {"acct": "Buduj24", "plat": "Google", "cost": 4326, "dcost": 21.3, "conv": 134, "dconv": -10.1, "val": 34739, "dval": -3.3, "roas": 8.0, "droas": -20.0, "cpc": 0.71, "ctr": 2.11},
+        {"acct": "Optyk Kochański", "plat": "Google", "cost": 4229, "dcost": 8.5, "conv": 32, "dconv": -25.6, "val": 17819, "dval": 37.4, "roas": 4.2, "droas": 27.0, "cpc": 1.34, "ctr": 1.81},
+        {"acct": "darymex.pl", "plat": "Google", "cost": 2725, "dcost": -0.7, "conv": 111, "dconv": 22.0, "val": 23878, "dval": 11.0, "roas": 8.8, "droas": 12.0, "cpc": 0.48, "ctr": 3.95},
+        {"acct": "Darymex", "plat": "Meta", "cost": 1448, "dcost": -4.4, "conv": 1959, "dconv": -2.8, "val": 0, "dval": null, "roas": 0.0, "droas": null, "cpc": 0.22, "ctr": 4.57},
+        {"acct": "KOSdesign", "plat": "Google", "cost": 491, "dcost": 39.5, "conv": 1, "dconv": -50.0, "val": 37, "dval": -99.4, "roas": 0.1, "droas": -100.0, "cpc": 1.14, "ctr": 3.03}
+      ],
+      "kpi_total": {"acct": "Razem PZ", "plat": "", "cost": 18061, "dcost": 12.2, "conv": 2413, "dconv": -3.8, "val": 126467, "dval": -15.1, "roas": 7.0, "droas": -24.0, "cpc": null, "ctr": null},
+      "kpi_note": "Najgorsza dynamika ROAS ze wszystkich portfoliów: koszt +12,2% przy wartości konwersji −15,1%. Darymex Meta w ogóle nie przekazuje wartości konwersji mimo 1 959 zliczonych konwersji."
+    }
+  ],
+  "blocks": [
+    {
+      "title": "Konta bez Budget Monitora",
+      "items": [
+        "<b>AS</b> — 12 z 13 kont: bobowozki.pl BWG, Puder i Krem, Grail Point Ads, MiStore, lalkametoo.pl, BoboWózki (Meta), RENOWA24, Geek Store, Mi-Store.pl (Meta), PORTAL OKIENNY, GeekStore (Meta), Mi-Store.pl (Bing). Łącznie 269 455 zł wydatku MTD bez żadnego limitu.",
+        "<b>AH</b> — 6 kont: przesylarka.pl, slf24.pl, slf24.co.uk, slf24.ie, slf24.de, slf24.fr.",
+        "<b>PZ</b> — 2 konta: Darymex (Meta), KOSdesign.",
+        "<b>MS</b> — komplet, wszystkie 13 kont ma monitor.",
+        "Dodanie monitora w Optmyzr to jedyny warunek, żeby konto dostało pełny wiersz budżetowy w kolejnych raportach — kwoty czytane są wprost z ustawień."
+      ]
+    },
+    {
+      "title": "Zastrzeżenia do danych",
+      "items": [
+        "<b>Zawyżone zliczanie konwersji</b> — Mi-Store.pl (Meta, AS), sklepogrodniczy.pl (Meta, MS) i 9d sp. z o.o. (Meta, MS) raportują dziesiątki tysięcy konwersji tygodniowo przy kilkudziesięciu tysiącach kliknięć. Sumy konwersji AS i MS są przez to bezużyteczne; koszt i wartość konwersji pozostają wiarygodne.",
+        "<b>Brak wartości konwersji</b> — Darymex (Meta, PZ) zlicza konwersje, ale nie przekazuje ich wartości, więc ROAS wychodzi zerowy.",
+        "<b>Wiele walut</b> — AH łączy PLN, GBP i EUR, MS ma jedno konto w USD. Sumy portfoliów obejmują wyłącznie konta w PLN; pozostałe mają własne wiersze i nie są przeliczane.",
+        "<b>ROAS liczony ręcznie</b> — kolumny ROAS i ACOS zwracane przez Optmyzr są zawyżone stukrotnie, więc wszystkie wartości w raporcie pochodzą z dzielenia wartości konwersji przez koszt."
+      ]
+    }
+  ]
+}
